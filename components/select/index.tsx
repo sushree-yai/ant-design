@@ -84,7 +84,7 @@ class Select<ValueType extends SelectValue = SelectValue> extends React.Componen
     getPrefixCls,
     renderEmpty,
     direction,
-    virtual,
+    virtual = false,
     dropdownMatchSelectWidth,
   }: ConfigConsumerProps) => {
     const {
@@ -94,9 +94,10 @@ class Select<ValueType extends SelectValue = SelectValue> extends React.Componen
       size: customizeSize,
       listHeight = 256,
       listItemHeight = 24,
-      getPopupContainer,
+      getPopupContainer = triggerNode => triggerNode.parentNode as HTMLElement,
       dropdownClassName,
       bordered,
+      showSearch = true,
     } = this.props as InternalSelectProps<ValueType>;
 
     const prefixCls = getPrefixCls('select', customizePrefixCls);
@@ -167,6 +168,7 @@ class Select<ValueType extends SelectValue = SelectValue> extends React.Componen
               className={mergedClassName}
               getPopupContainer={getPopupContainer || getContextPopupContainer}
               dropdownClassName={rcSelectRtlDropDownClassName}
+              showSearch={showSearch}
             />
           );
         }}
